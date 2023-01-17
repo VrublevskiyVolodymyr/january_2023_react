@@ -1,0 +1,23 @@
+.wrap{
+  background: #272b33;
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.card{
+  width: 100%;
+  height: 550px;
+  background: #cdd7e0;
+  margin: 10px 20px;
+}
+.name{
+  text-align: center;
+  color: #26272c;
+}
+
+.bodyCard{
+  display: flex;
+  justify-content: flex-start;
+}
+
+
