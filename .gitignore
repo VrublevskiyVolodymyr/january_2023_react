@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-
+.pacrage.json
 # production
 /build
 .idea

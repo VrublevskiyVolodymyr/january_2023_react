@@ -1,6 +1,8 @@
-export const SimpsonComponent=(props)=> {
-    let {itemName, pic, text,phrases,description} = props;
-    let classNameItem = 'card';
+ const SimpsonComponent=({simpson})=> {
+
+    const {itemName, pic, text,phrases,description} = simpson;
+     console.log(itemName)
+    const classNameItem = 'card';
     return (
         <div className={classNameItem}>
             <h1 className='name'>{itemName}</h1>
@@ -17,4 +19,4 @@ export const SimpsonComponent=(props)=> {
     );
 }
 
-
+export{SimpsonComponent}
