@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import {Users} from "./Components";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
 
-export default App;
+const App = () => {
+    return (
+        <div>
+            {/*з jsonplaceholder отримати всіх юзерів в компоненту Users.js*/}
+            {/*відобразити кожного інформацію (id,name) з кожного юзера (компонента User)*/}
+            {/*Зробити кнопку вибора юзера, при натисканні на яку в Users.js ви покажете  пости цього юзера*/}
+            {/*пости мають виводитись під компонетою Users (в App компоненті)*/}
+            <Users/>
+
+
+            {/*=====*/}
+            {/*є API от SpaceX*/}
+            {/*https://api.spacexdata.com/v3/launches/*/}
+            {/*потрібно вивести всі запуски кораблів окрім 2020 року*/}
+            {/*репрезентувати тільки окремі поля (зазначені в скрнішоті в папці)*/}
+        </div>
+    );
+};
+
+export {App};
+
