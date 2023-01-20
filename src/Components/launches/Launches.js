@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 
-import {Launch} from "../launch/launch";
+import {Launch} from "../launch/Launch";
 
 const Launches = () => {
 
