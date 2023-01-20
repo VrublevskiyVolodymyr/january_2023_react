@@ -1,0 +1,16 @@
+.title{
+    width: 100%;
+   text-align: center;
+}
+.launch{
+    width: 46%;
+    height: auto;
+    margin: 5px;
+    background: #b1b0af;
+}
+.launches{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
