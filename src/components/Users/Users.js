@@ -1,16 +1,10 @@
-import {useEffect, useState} from "react";
+
 
 import {User} from "../User/User";
-import {userService} from "../../services";
 
 
-const Users = ({setUserId}) => {
 
-    const [users, setUsers] = useState([]);
-
-    useEffect(() => {
-        userService.getAll().then(({data}) => setUsers([...data]))
-    }, []);
+const Users = ({setUserId, users}) => {
 
 
     return (

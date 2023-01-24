@@ -5,7 +5,7 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import {userValidator} from "../../validators";
 import {userService} from "../../services";
 
-const UserForm = () => {
+const UserForm = ({setUsers}) => {
 
     const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
         mode: 'all',
@@ -14,7 +14,7 @@ const UserForm = () => {
 
     const submit = async (user) => {
         const {data} = await userService.create(user);
-        console.log(data);
+        setUsers(prev=>[...prev, data]);
         reset();
     }
 

@@ -8,7 +8,7 @@ const userService={
 
     getById: (id)=>axiosService.get(urls.users +`${id}`),
 
-    create: (newUser)=>axiosService.post(urls.users,{newUser})
+    create: (newUser)=>axiosService.post(urls.users,(newUser))
 }
 export {userService}
 

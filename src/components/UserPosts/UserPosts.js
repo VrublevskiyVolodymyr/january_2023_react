@@ -1,15 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {postService} from "../../services";
 
 import {UserPost} from "../UserPost/UserPost";
 
-const UserPosts = ({userId}) => {
-
-    const [posts, setPosts] = useState([]);
-
-    useEffect(() => {
-        postService.getAllByID(`${userId}`).then(value => value.data).then(value => setPosts([...value]))
-    }, [userId]);
+const UserPosts = ({userId,posts }) => {
 
     return (
         <div>

@@ -6,24 +6,26 @@ import {postService} from "../../services";
 import {postValidator} from "../../validators";
 
 
-const PostForm = () => {
+const PostForm = ({setPosts}) => {
 
-    const {register,handleSubmit, reset, formState:{errors,isValid}}=useForm({mode:'all',resolver:joiResolver(postValidator)})
+    const {register, handleSubmit, reset, formState: {errors, isValid}} = useForm({
+        mode: 'all',
+        resolver: joiResolver(postValidator)
+    })
 
     const submit = async (post) => {
-        const {data} = await postService.create(post);
-        console.log(data)
+        await postService.create(post).then(({data})=>setPosts(prev => [...prev, data]));
         reset()
     }
 
     return (
-            <form onSubmit={handleSubmit(submit)}>
+        <form onSubmit={handleSubmit(submit)}>
 
             <input type="text" plaseholder={'title'} {...register('title')}/>
-            {errors.title&& <span>{errors.title.message}</span>}
+            {errors.title && <span>{errors.title.message}</span>}
 
             <input type="text" plaseholder={'body'} {...register('body')}/>
-            {errors.body&& <span>{errors.body.message}</span>}
+            {errors.body && <span>{errors.body.message}</span>}
 
             <button disabled={!isValid}>Save</button>
 
