@@ -1,3 +1,3 @@
-export * from './userValidator';
-export * from './postValidator';
+export * from './carValidator';
+
 

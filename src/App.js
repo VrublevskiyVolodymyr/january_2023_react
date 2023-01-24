@@ -1,29 +1,26 @@
-import {useState} from "react";
-
-import {PostForm, UserForm, UserPosts, Users} from "./components";
-
+import {CarForm, Cars} from "./components";
+import {carService} from "./services";
+import {useEffect, useState} from "react";
 
 const App = () => {
+    const [cars, setCars] = useState([]);
+    const [updateCar, setUpdateCar] = useState(null);
 
-    const [userId, setUserId] = useState(null);
-
+    useEffect(() => {
+        carService.getAll().then(({data})=>setCars([...data]))
+    }, [])
 
     return (
         <div>
 
-
-            <UserForm/>
+            <CarForm setCars={setCars} updateCar={updateCar} />
 
             <hr/>
 
-            <Users setUserId={setUserId}/>
-
-
-
+            <Cars cars={cars} setUpdateCar={setUpdateCar} setCars={setCars}/>
 
         </div>
     );
 };
 
 export {App};
-
