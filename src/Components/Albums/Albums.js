@@ -9,7 +9,7 @@ const Albums = () => {
     },[])
 
     return (
-        <div>
+        <div >
             {albums.map(album=><Album key={album.id} album={album}/>)}
         </div>
     );

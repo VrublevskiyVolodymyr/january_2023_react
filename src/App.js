@@ -31,8 +31,9 @@ const App = () => {
                     <Route index element={<HomePage/>}/>
                     <Route path={'todos'} element={<TodosPage/>}/>
                     <Route path={'albums'} element={<AlbumsPage/>}/>
-                    <Route path={'comments'} element={<CommentsPage/>}/>
-                    <Route path={'posts/:postId'} element={<PostDetailsPage/>}/>
+                    <Route path={'comments'} element={<CommentsPage/>}>
+                        <Route path={':postId'} element={<PostDetailsPage/>}/>
+                    </Route>
                     <Route path={'about'} element={<AboutPage/>}/>
                     <Route path={'*'} element={<NotFoundPage/>}/>
                 </Route>

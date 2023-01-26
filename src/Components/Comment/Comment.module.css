@@ -1,0 +1,9 @@
+.Comment{
+    background: aquamarine;
+    margin: 5px;
+}
+.Comments{
+    width: auto;
+    height: 640px;
+    overflow-y: scroll;
+}
