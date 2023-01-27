@@ -1,5 +1,7 @@
-import {axiosService} from "./axiosService";
+import {axiosService} from "./axiosServise";
+
 import {urls} from "../configs";
+
 
 const postService = {
     getAll: () => axiosService.get(urls.posts),

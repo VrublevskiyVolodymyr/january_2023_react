@@ -1,5 +1,5 @@
-import {axiosService} from "./axiosService";
 
+import {axiosService} from "./axiosServise";
 import {urls} from "../configs";
 
   const albumService= {
