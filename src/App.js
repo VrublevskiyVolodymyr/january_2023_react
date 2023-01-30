@@ -1,7 +1,7 @@
 import {useState} from "react";
 
-import './Components/User/styleUser.css'
-import {Launches, Posts, Users} from "./Components";
+import './components/User/styleUser.css'
+import {Launches, Posts, Users} from "./components";
 
 const App = () => {
 
