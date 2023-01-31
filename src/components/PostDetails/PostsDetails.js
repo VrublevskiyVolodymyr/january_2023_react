@@ -2,11 +2,13 @@ import {useEffect, useState} from "react";
 
 import {postService} from "../../services";
 import css from './PostDetails.module.css'
+import {useNavigate} from "react-router-dom";
 
 
 const PostsDetails = ({postId}) => {
 
     const [post, setPost] = useState(null);
+    const navigate=useNavigate();
 
     useEffect(() => {
         postService.getById(postId).then(({data}) => {
@@ -21,6 +23,7 @@ const PostsDetails = ({postId}) => {
                     <div>userId: {post.userId}</div>
                     <div>title: {post.title}</div>
                     <div>body: {post.body}</div>
+                    <button onClick={()=>navigate(`/comments`)}> Back to comments</button>
                 </>
             }
         </div>

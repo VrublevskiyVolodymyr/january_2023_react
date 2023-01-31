@@ -9,7 +9,7 @@ const AuthContext = createContext(null);
 
 const AuthProvider = ({children}) => {                    //створюєм компоненту AuthProvider яка приймає children і повертає їх обгорнутих в AuthContext.
     const [user, setUser] = useState(null);      //відповідає за те чи є залогінений user чи його немає
-
+    console.log('user:', user)
     const logIn = (loginUser) => {                       //ф-ія прийає залогіненого user i сетає в seState
         setUser(loginUser)}
 
