@@ -1,15 +1,17 @@
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 
 import {
     AboutPage,
     AlbumsPage,
     CommentsPage,
-    HomePage,
+    HomePage, LoginPage,
     NotFoundPage,
     PostDetailsPage,
-    TodosPage
+    TodosPage, UsersPage
 } from "./pages";
 import {MainLayout} from "./layouts";
+import {RequireAuth} from "./hooks/RequireAuth";
+
 
 
 // реалізувати 3 маршрути
@@ -23,23 +25,32 @@ import {MainLayout} from "./layouts";
 //
 // відображати ті чи інші маршрути можна на будь-якому рівні на ваш вибір.
 
+
+// в </RequireAuth> передаєм children <CommentsPage/>
 const App = () => {
     return (
+
         <div>
             <Routes>
                 <Route path={'/'} element={<MainLayout/>}>
-                    <Route index element={<HomePage/>}/>
+                    <Route index element={<Navigate to={'home'}/>}/>
+                    <Route path={'home'} element={<HomePage/>}/>
                     <Route path={'todos'} element={<TodosPage/>}/>
                     <Route path={'albums'} element={<AlbumsPage/>}/>
-                    <Route path={'comments'} element={<CommentsPage/>}>
+                    <Route path={'comments'} element={
+                        <RequireAuth> <CommentsPage/> </RequireAuth>}>
                         <Route path={':postId'} element={<PostDetailsPage/>}/>
                     </Route>
+                    <Route path={'users'} element={<UsersPage/>}/>
                     <Route path={'about'} element={<AboutPage/>}/>
+                    <Route path={'login'} element={<LoginPage/>}/>
                     <Route path={'*'} element={<NotFoundPage/>}/>
                 </Route>
             </Routes>
         </div>
+
     );
 };
 
 export {App};
+
