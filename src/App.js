@@ -25,7 +25,6 @@ import {RequireAuth} from "./hooks/RequireAuth";
 //
 // відображати ті чи інші маршрути можна на будь-якому рівні на ваш вибір.
 
-
 // в </RequireAuth> передаєм children <CommentsPage/>
 const App = () => {
     return (
