@@ -1,0 +1,10 @@
+.post h1{
+    display: flex;
+    margin: 0;
+    background: cornflowerblue;
+    justify-content: center;
+}
+.post{
+    height: 720px;
+    overflow-y: scroll;
+}

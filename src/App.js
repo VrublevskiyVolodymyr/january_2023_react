@@ -1,24 +1,34 @@
-import {Users} from "./Components";
+import {Navigate, Route, Routes} from "react-router-dom";
 
+import {MainLayout} from "./layouts";
+import {AboutPage, CommentsPage, DogsAndCatsPage, HomePage, PostsPage} from "./pages";
+
+// отримати пости та вивести їх використовуючи класові компоненти
+// отримати коментарі та вивести їх використовуючи класові компоненти
+//
+// Використовуючи хук useReducer в якому початковый стейт буде {cats: [], dogs:[]}
+// Реалізувати збереження окремо нового кота, та окремо собаку (приклад на зображенні)
+//
+// Advance
+// реалізувати видалення для кожного при натисканні на кнопку delete
 
 const App = () => {
     return (
         <div>
-            {/*з jsonplaceholder отримати всіх юзерів в компоненту Users.js*/}
-            {/*відобразити кожного інформацію (id,name) з кожного юзера (компонента User)*/}
-            {/*Зробити кнопку вибора юзера, при натисканні на яку в Users.js ви покажете  пости цього юзера*/}
-            {/*пости мають виводитись під компонетою Users (в App компоненті)*/}
-            <Users/>
-
-
-            {/*=====*/}
-            {/*є API от SpaceX*/}
-            {/*https://api.spacexdata.com/v3/launches/*/}
-            {/*потрібно вивести всі запуски кораблів окрім 2020 року*/}
-            {/*репрезентувати тільки окремі поля (зазначені в скрнішоті в папці)*/}
+          <Routes>
+              <Route path={'/'} element={<MainLayout/>}>
+                  <Route index element={<Navigate to={'home'}/>}/>
+                  <Route path={'home'} element={<HomePage/>}/>
+                  <Route path={'posts'} element={<PostsPage/>}/>
+                  <Route path={'comments'} element={<CommentsPage/>}/>
+                  <Route path={'dogsAndCats'} element={<DogsAndCatsPage/>}/>
+                  <Route path={'about'} element={<AboutPage/>}/>
+              </Route>
+          </Routes>
         </div>
     );
 };
 
 export {App};
+
 

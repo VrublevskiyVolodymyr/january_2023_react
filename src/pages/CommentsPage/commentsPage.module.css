@@ -1,0 +1,11 @@
+.comments h1{
+    display: flex;
+    margin: 0;
+    background: #d0bc94;
+    justify-content: center;
+
+}
+.comments{
+    height: 720px;
+    overflow-y: scroll;
+}

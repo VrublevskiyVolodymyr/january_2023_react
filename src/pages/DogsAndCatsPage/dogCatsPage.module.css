@@ -1,0 +1,11 @@
+.dogsCats{
+    width: 100%;
+}
+
+.dogsCats h1{
+    margin: 0;
+    width: 100%;
+    display: flex;
+    background: #48bc4c;
+    justify-content: center;
+}

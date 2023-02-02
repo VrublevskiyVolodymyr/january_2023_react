@@ -1,0 +1,7 @@
+.cat{
+    display: flex;
+    justify-content: space-between;
+    background: #d0bbaa;
+    margin: 5px;
+}
+
