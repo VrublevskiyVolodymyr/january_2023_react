@@ -4,11 +4,11 @@ import {Cats} from "../Cats/Cats";
 import {Dogs} from "../Dogs/Dogs";
 import css from "./catAndDogRuduse.module.css"
 
+
 const CatsAndDogsReduser = () => {
 
 const catInp=useRef();
 const dogInp=useRef();
-
 
     const reduser = (state, action) => {
 
@@ -40,16 +40,16 @@ const dogInp=useRef();
     }
 
 const AddCat=()=>{
-    dispatch({type:'SaveCat', payload:catInp.current.value})
+    catInp.current.value&&dispatch({type:'SaveCat', payload:catInp.current.value})
     catInp.current.value='';
 }
 
     const AddDog=()=>{
-        dispatch({type:'SaveDog', payload:dogInp.current.value})
+        dogInp.current.value&&dispatch({type:'SaveDog', payload:dogInp.current.value})
         dogInp.current.value='';
     }
 
-   const initValue =()=>(
+   const initValue =()=>( //пачаткове значення state
        {cats:[], dogs:[]}
    )
 
