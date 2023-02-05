@@ -1,0 +1,11 @@
+.userPage{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background: #a2b27b;
+
+}
+h1{text-align: center
+}

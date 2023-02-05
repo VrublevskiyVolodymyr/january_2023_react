@@ -1,0 +1,9 @@
+.petsForm{
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: space-around;
+}
+h2{
+    margin-left:80px ;
+}

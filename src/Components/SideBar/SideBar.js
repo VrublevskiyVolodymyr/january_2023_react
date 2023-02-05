@@ -7,9 +7,11 @@ const SideBar = () => {
     return (
         <div className={css.sideBar}>
             <NavLink to={'home'}>home</NavLink>
+            <NavLink to={'users'}>users</NavLink>
+            <NavLink to={'cars'}>cars</NavLink>
             <NavLink to={'posts'}>posts</NavLink>
             <NavLink to={'comments'}>comments</NavLink>
-            <NavLink to={'dogsAndCats'}>cat and dogs</NavLink>
+            <NavLink to={'pets'}>pets</NavLink>
             <NavLink to={'about'}>about</NavLink>
         </div>
     );

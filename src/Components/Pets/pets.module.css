@@ -1,0 +1,10 @@
+.pets {
+    display: flex;
+    justify-content: space-around;
+}
+.dogs{
+    width: 50%;
+}
+.cats{
+    width: 50%;
+}
