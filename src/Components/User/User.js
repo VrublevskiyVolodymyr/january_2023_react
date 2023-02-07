@@ -1,12 +1,20 @@
+import {useDispatch} from "react-redux";
 
-const User = ({user,setPostsId }) => {
+import {userActions} from "../../redux";
+import css from './user.module.css'
 
-    const {id, name} = user
+const User = ({user}) => {
+
+    const {id, name,username} = user
+    const dispatch = useDispatch();
+
     return (
-        <div>
+        <div className={css.user} >
             <div>id: {id}</div>
             <div>name: {name}</div>
-            <button onClick={()=>setPostsId(id)}>User Posts</button>
+            <div>username: {username}</div>
+            <button onClick={()=>dispatch(userActions.setSelectedUser(user))}>select</button>
+            <button onClick={()=>dispatch(userActions.getById({id}))}>apiSelect</button>
         </div>
     );
 };

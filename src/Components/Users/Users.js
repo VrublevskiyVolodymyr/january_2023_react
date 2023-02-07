@@ -1,32 +1,23 @@
-import {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 
-import {postsService, userService} from "../../Services";
 import {User} from "../User/User";
-import {UserPost} from "../UserPost/UserPost";
+import {useDispatch, useSelector} from "react-redux";
+import {userActions} from "../../redux";
 
 const Users = () => {
-
-    const [users, setUsers] = useState([]);
-    const [posts, setPosts] = useState([]);
-    const [postsId, setPostsId] = useState(null);
+    const dispatch = useDispatch()
+    const {users, errors, loading} = useSelector(state => state.users);
 
     useEffect(() => {
-        userService.getAll().then(value => value.data).then(value => setUsers([...value]))
+     dispatch(userActions.getAll())
     }, []);
 
-    useEffect(() => {
-        postsService.getAllByID(`${postsId}`).then(value => value.data).then(value => setPosts([...value]))
-    }, [postsId]);
 
     return (
         <div>
-            <h1>Users:</h1>
-            {users.map(user => <User key={user.id} user={user} setPostsId={setPostsId}/>)}
-
-            <hr/>
-
-            <h1>UserPosts:</h1>
-            {postsId && posts.map(post => <UserPost key={post.id} post={post}/>)}
+            {errors&&JSON.stringify(errors)}
+            {loading&&<h1>loading</h1>}
+            {users.map(user=><User key={user.id} user={user}/>)}
         </div>
     );
 };

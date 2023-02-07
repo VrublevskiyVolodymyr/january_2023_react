@@ -1,22 +1,30 @@
-import {Users} from "./Components";
+// В буквальному сенсі слова повторіть все що було на лекції
+// наберіть це все руцями вдумуючись що ви повторюєте (не копіпастіть з мого репозиторію)
+// після цього зробіть ще один слайс для постів і реалізуйте те саме що і для юзерсів
+//
+// Advance
+// переробити першу таску с карами позбавившись стейтліфтингу в компонентах використовуючи redux-toolkit
+
+
+import {Navigate, Route, Routes} from "react-router-dom";
+import {PostsPage, UsersPage} from "./pages";
+import {MainLayout} from "./layouts";
 
 
 const App = () => {
     return (
-        <div>
-            {/*з jsonplaceholder отримати всіх юзерів в компоненту Users.js*/}
-            {/*відобразити кожного інформацію (id,name) з кожного юзера (компонента User)*/}
-            {/*Зробити кнопку вибора юзера, при натисканні на яку в Users.js ви покажете  пости цього юзера*/}
-            {/*пости мають виводитись під компонетою Users (в App компоненті)*/}
-            <Users/>
 
+    <div>
+        <Routes>
+            <Route path={'/'} element={<MainLayout/>}>
+                <Route index element={<Navigate to={'users'}/>}/>
+                <Route path={'users'} element={<UsersPage/>}/>
+                {/*<Route path={'cars'} element={<CarsPage/>}/>*/}
+                <Route path={'posts'} element={<PostsPage/>}/>
+            </Route>
+        </Routes>
+</div>
 
-            {/*=====*/}
-            {/*є API от SpaceX*/}
-            {/*https://api.spacexdata.com/v3/launches/*/}
-            {/*потрібно вивести всі запуски кораблів окрім 2020 року*/}
-            {/*репрезентувати тільки окремі поля (зазначені в скрнішоті в папці)*/}
-        </div>
     );
 };
 

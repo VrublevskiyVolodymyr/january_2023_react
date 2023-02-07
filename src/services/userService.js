@@ -1,5 +1,5 @@
 
-import {axiosService} from "./AxiosServise";
+import {axiosService} from "./axiosServise";
 
 const userService={
     getAll: ()=>axiosService.get('/users'),
