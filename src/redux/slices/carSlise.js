@@ -1,56 +1,53 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-import {postService} from "../../services";
-
-
+import {carService} from "../../services";
 
 const initialState = {
-    posts: [],
+    cars: [],
+    carForApdate:null,
     errors: null,
     loading: null,
-    selectedPost: null
+    selectedCar: null
 };
 
 const getAll = createAsyncThunk(
-    'postSlice/getAll',
-    async (_, {rejectWithValue}) => {
+    'carSlice/getAll',
+    async (_, thunkAPI) => {
         try {
-            const {data} = await postService.getAll()
-
+            const {data} = await carService.getAll()
             return data
         } catch (e) {
-            return rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 );
 
 const getById =createAsyncThunk(
-    'postService/getById',
-    async ({id}, {rejectWithValue}) => {
+    'carService/getById',
+    async ({id}, thunkAPI) => {
         try {
-            const {data} = await postService.getByID(id);
+            const {data} = await carService.getById(id);
 
             return data
         } catch (e){
-            return rejectWithValue(e.response.data)
+            return thunkAPI.rejectWithValue(e.response.data)
         }
-
     }
 )
 
-const postSlice = createSlice({
-    name: 'postSlice',
+const carSlice = createSlice({
+    name: 'carSlice',
     initialState,
     reducers: {
-        setSelectedPost: (state, action) => {
-            state.selectedPost = action.payload
+        setSelectedCar: (state, action) => {
+            state.selectedCar = action.payload
         }
     },
 
     extraReducers: (builder) => builder
         .addCase(getAll.fulfilled, (state, action) => {
             state.loading = false
-            state.posts = action.payload
+            state.cars = action.payload
         })
         .addCase(getAll.rejected, (state, action) => {
             state.loading = false
@@ -60,16 +57,16 @@ const postSlice = createSlice({
             state.loading = true
         })
         .addCase(getById.fulfilled,(state, action)=>{
-            state.selectedPost=action.payload
+            state.selectedUser=action.payload
         })
 });
 
-const {reducer: postReducer, actions: {setSelectedPost}} = postSlice
+const {reducer: carReducer, actions: {setSelectedCar}} = carSlice
 
-const postActions = {
-    setSelectedPost,
+const carActions = {
+    setSelectedCar,
     getAll,
     getById
 }
 
-export {postReducer, postActions}
+export {carReducer, carActions}
