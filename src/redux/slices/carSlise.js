@@ -4,17 +4,17 @@ import {carService} from "../../services";
 
 const initialState = {
     cars: [],
-    carForApdate:null,
+    carForUpdate: null,
     errors: null,
     loading: null,
-    selectedCar: null
 };
 
 const getAll = createAsyncThunk(
     'carSlice/getAll',
     async (_, thunkAPI) => {
         try {
-            const {data} = await carService.getAll()
+            // await new Promise(resolve => setTimeout(()=>resolve(),2000))
+            const {data} = await carService.getAll();
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
@@ -22,14 +22,36 @@ const getAll = createAsyncThunk(
     }
 );
 
-const getById =createAsyncThunk(
-    'carService/getById',
+const create = createAsyncThunk(
+    'carSlice/create',
+    async ({car}, thunkAPI) => {
+        try {
+            await carService.create(car);
+            thunkAPI.dispatch(getAll())
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
+const deleteById = createAsyncThunk(
+    'carSlice/deleteById',
     async ({id}, thunkAPI) => {
         try {
-            const {data} = await carService.getById(id);
+            await carService.deleteById(id);
+            thunkAPI.dispatch(getAll())
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
 
-            return data
-        } catch (e){
+const updateById = createAsyncThunk(
+    'carService/updateById',
+    async ({id, car}, thunkAPI) => {
+        try {
+            await carService.updateById(id, car);
+            thunkAPI.dispatch(getAll())
+        } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
         }
     }
@@ -39,8 +61,8 @@ const carSlice = createSlice({
     name: 'carSlice',
     initialState,
     reducers: {
-        setSelectedCar: (state, action) => {
-            state.selectedCar = action.payload
+        setCarForUpdate: (state, action) => {
+            state.carForUpdate = action.payload
         }
     },
 
@@ -49,24 +71,20 @@ const carSlice = createSlice({
             state.loading = false
             state.cars = action.payload
         })
-        .addCase(getAll.rejected, (state, action) => {
-            state.loading = false
-            state.errors = action.payload
-        })
-        .addCase(getAll.pending, (state) => {
-            state.loading = true
-        })
-        .addCase(getById.fulfilled,(state, action)=>{
-            state.selectedUser=action.payload
+        .addDefaultCase((state, actions) => {
+            const [actionStatus] = actions.type.split('/').slice(-1);
+            state.loading = actionStatus === 'pending';
         })
 });
 
-const {reducer: carReducer, actions: {setSelectedCar}} = carSlice
+const {reducer: carReducer, actions: {setCarForUpdate}} = carSlice
 
 const carActions = {
-    setSelectedCar,
     getAll,
-    getById
+    create,
+    deleteById,
+    setCarForUpdate,
+    updateById
 }
 
 export {carReducer, carActions}

@@ -1,4 +1,3 @@
-const baseURLCars = 'http://owu.linkpc.net/carsAPI/v1'
 
 const cars = '/cars'
 
@@ -9,4 +8,4 @@ const urlsCars = {
     }
 }
 
-export {urlsCars, baseURLCars}
+export {urlsCars}

@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import {baseURLCars} from '../configs'
-
-const apiService=axios.create({baseURLCars})
+const apiService=axios.create({baseURL:'http://owu.linkpc.net/carsAPI/v1'})
 
 export {apiService}

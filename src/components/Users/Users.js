@@ -10,7 +10,7 @@ const Users = () => {
 
     useEffect(() => {
      dispatch(userActions.getAll())
-    }, []);
+    }, [dispatch]);
 
 
     return (
