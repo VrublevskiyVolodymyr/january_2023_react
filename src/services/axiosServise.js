@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import {baseURL} from '../configs'
 
-const axiosService = axios.create({baseURL})
+const axiosService = axios.create({baseURL:'https://jsonplaceholder.typicode.com/'})
 
 export {axiosService}

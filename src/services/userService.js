@@ -1,7 +1,9 @@
-import {axiosService} from "./axiosServise";
+import {apiService} from "./apiService";
+import {urlsCars} from "../configs";
 
 const userService = {
-    getAll: () => axiosService.get('/users'),
-    getById: (id) => axiosService.get(`/users/${id}`),
+    create: (user)=>apiService.post(urlsCars.users, user)
 }
-export {userService}
+export {
+    userService
+}

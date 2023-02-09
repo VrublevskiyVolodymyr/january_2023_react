@@ -15,6 +15,8 @@ const Header = () => {
             <NavLink to={'users'}>users</NavLink>
             <NavLink to={'cars'}>cars</NavLink>
             <NavLink to={'posts'}>posts</NavLink>
+            <NavLink to={'login'}>login</NavLink>
+            <NavLink to={'register'}>register</NavLink>
             <div>{selectedUser && selectedUser.name}</div>
         </div>
     );
