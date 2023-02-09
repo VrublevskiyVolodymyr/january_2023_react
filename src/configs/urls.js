@@ -1,6 +1,6 @@
-const baseURL='https://jsonplaceholder.typicode.com/'
+const baseURL = 'https://jsonplaceholder.typicode.com/'
 
-const urls={
+const urls = {
     users: '/users'
 }
 export {baseURL, urls}

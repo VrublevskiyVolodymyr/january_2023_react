@@ -1,4 +1,5 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
+
 import {userService} from "../../services";
 
 
@@ -22,14 +23,14 @@ const getAll = createAsyncThunk(
     }
 );
 
-const getById =createAsyncThunk(
+const getById = createAsyncThunk(
     'userService/getById',
     async ({id}, {rejectWithValue}) => {
         try {
             const {data} = await userService.getById(id);
 
             return data
-        } catch (e){
+        } catch (e) {
             return rejectWithValue(e.response.data)
         }
     }
@@ -56,8 +57,8 @@ const userSlice = createSlice({
         .addCase(getAll.pending, (state) => {
             state.loading = true
         })
-        .addCase(getById.fulfilled,(state, action)=>{
-           state.selectedUser=action.payload
+        .addCase(getById.fulfilled, (state, action) => {
+            state.selectedUser = action.payload
         })
 });
 

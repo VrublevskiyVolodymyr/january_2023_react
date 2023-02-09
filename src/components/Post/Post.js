@@ -5,7 +5,7 @@ import css from './post.module.css'
 import {postActions} from "../../redux";
 
 const Post = ({post}) => {
-    const {userId, id, title, body}=post
+    const {userId, id, title, body} = post
     const dispatch = useDispatch();
 
 
@@ -15,8 +15,8 @@ const Post = ({post}) => {
             <div>id:{id}</div>
             <div>title:{title}</div>
             <div>body:{body}</div>
-            <button onClick={()=>dispatch(postActions.setSelectedPost(post))}>select</button>
-            <button onClick={()=>dispatch(postActions.getById({id}))}>apiSelect</button>
+            <button onClick={() => dispatch(postActions.setSelectedPost(post))}>select</button>
+            <button onClick={() => dispatch(postActions.getById({id}))}>apiSelect</button>
         </div>
     );
 };

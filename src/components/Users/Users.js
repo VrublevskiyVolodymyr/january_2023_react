@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
 
 import {User} from "../User/User";
-import {useDispatch, useSelector} from "react-redux";
 import {userActions} from "../../redux";
 
 const Users = () => {
@@ -9,15 +9,15 @@ const Users = () => {
     const {users, errors, loading} = useSelector(state => state.users);
 
     useEffect(() => {
-     dispatch(userActions.getAll())
+        dispatch(userActions.getAll())
     }, [dispatch]);
 
 
     return (
         <div>
-            {errors&&JSON.stringify(errors)}
-            {loading&&<h1>loading</h1>}
-            {users.map(user=><User key={user.id} user={user}/>)}
+            {errors && JSON.stringify(errors)}
+            {loading && <h1>loading</h1>}
+            {users.map(user => <User key={user.id} user={user}/>)}
         </div>
     );
 };

@@ -7,11 +7,11 @@ import css from './header.module.css'
 
 const Header = () => {
 
-    const{selectedUser}=useSelector(state => state.users)
+    const {selectedUser} = useSelector(state => state.users)
 
 
     return (
-        <div className={css.header} >
+        <div className={css.header}>
             <NavLink to={'users'}>users</NavLink>
             <NavLink to={'cars'}>cars</NavLink>
             <NavLink to={'posts'}>posts</NavLink>

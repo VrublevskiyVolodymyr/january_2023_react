@@ -7,16 +7,16 @@ import css from './posts.module.css'
 
 const Posts = () => {
     const dispatch = useDispatch()
-    const {posts,selectedPost } = useSelector(state => state.posts);
+    const {posts, selectedPost} = useSelector(state => state.posts);
 
     useEffect(() => {
         dispatch(postActions.getAll())
-    }, []);
+    }, [dispatch]);
 
     return (
         <div>
             <div className={css.title}>{selectedPost && selectedPost.title}</div>
-            {posts.map(post=><Post key={post.id} post={post}/>)}
+            {posts.map(post => <Post key={post.id} post={post}/>)}
         </div>
     );
 };

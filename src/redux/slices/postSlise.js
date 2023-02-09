@@ -3,7 +3,6 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import {postService} from "../../services";
 
 
-
 const initialState = {
     posts: [],
     errors: null,
@@ -24,14 +23,14 @@ const getAll = createAsyncThunk(
     }
 );
 
-const getById =createAsyncThunk(
+const getById = createAsyncThunk(
     'postService/getById',
     async ({id}, {rejectWithValue}) => {
         try {
             const {data} = await postService.getByID(id);
 
             return data
-        } catch (e){
+        } catch (e) {
             return rejectWithValue(e.response.data)
         }
 
@@ -59,8 +58,8 @@ const postSlice = createSlice({
         .addCase(getAll.pending, (state) => {
             state.loading = true
         })
-        .addCase(getById.fulfilled,(state, action)=>{
-            state.selectedPost=action.payload
+        .addCase(getById.fulfilled, (state, action) => {
+            state.selectedPost = action.payload
         })
 });
 
