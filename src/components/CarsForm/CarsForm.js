@@ -14,7 +14,8 @@ const CarsForm = () => {
         resolver: joiResolver(carValidator)
     })
     const dispatch = useDispatch();
-    const {carForUpdate} = useSelector(state => state.cars);
+    let {carForUpdate} = useSelector(state => state.cars);
+    console.log(carForUpdate)
 
     useEffect(() => {
         if (carForUpdate) {
@@ -27,15 +28,18 @@ const CarsForm = () => {
     const save = async (car) => {
         await dispatch(carActions.create({car}))
         reset()
+
     }
 
     const update = async (car) => {
         await dispatch(carActions.updateById({id: carForUpdate.id, car}))
+        await dispatch(carActions.setCarForUpdate(null))
         reset()
+
     }
 
     return (
-        <form onSubmit={handleSubmit(carForUpdate ? update : save)}>
+        <form onSubmit={handleSubmit(carForUpdate? update : save)}>
             <input type={"text"} placeholder={'brand'} {...register('brand')}/>
             <input type={"text"} placeholder={'price'} {...register('price', {valueAsNumber: true})}/>
             <input type={"text"} placeholder={'year'} {...register('year', {valueAsNumber: true})}/>
