@@ -5,6 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 
 import {carActions} from "../../redux";
 import {carValidator} from "../../validators";
+import {useNavigate} from "react-router-dom";
 
 
 const CarsForm = () => {
@@ -14,7 +15,8 @@ const CarsForm = () => {
         resolver: joiResolver(carValidator)
     })
     const dispatch = useDispatch();
-    const {carForUpdate} = useSelector(state => state.cars);
+    const navigate = useNavigate();
+    let {carForUpdate} = useSelector(state => state.cars);
 
     useEffect(() => {
         if (carForUpdate) {
@@ -31,6 +33,8 @@ const CarsForm = () => {
 
     const update = async (car) => {
         await dispatch(carActions.updateById({id: carForUpdate.id, car}))
+        await dispatch(carActions.setCarForUpdate(null))
+        navigate('/cars?page=1')
         reset()
     }
 
