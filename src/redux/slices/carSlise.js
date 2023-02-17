@@ -15,7 +15,6 @@ const getAll = createAsyncThunk(
     'carSlice/getAll',
     async ({page}, thunkAPI) => {
         try {
-            // await new Promise(resolve => setTimeout(()=>resolve(),2000))
             const {data} = await carService.getAll(page);
             return data
         } catch (e) {

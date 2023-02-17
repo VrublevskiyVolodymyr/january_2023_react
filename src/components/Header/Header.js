@@ -4,20 +4,14 @@ import {NavLink} from "react-router-dom";
 
 import css from './header.module.css'
 
-
 const Header = () => {
-
-    const {selectedUser} = useSelector(state => state.users)
 
 
     return (
         <div className={css.header}>
-            <NavLink to={'users'}>users</NavLink>
+            <NavLink to={'movies'}>movies</NavLink>
             <NavLink to={'cars'}>cars</NavLink>
             <NavLink to={'posts'}>posts</NavLink>
-            <NavLink to={'login'}>login</NavLink>
-            <NavLink to={'register'}>register</NavLink>
-            <div>{selectedUser && selectedUser.name}</div>
         </div>
     );
 };
