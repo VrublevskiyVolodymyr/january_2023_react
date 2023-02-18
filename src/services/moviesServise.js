@@ -3,13 +3,10 @@ import {urls} from "../configs";
 
 
 const moviesService = {
-    getAll: (page) => apiService.get(urls.movies,{params:{page}}),
-
-
-
-    // create: (data) => apiService.post(urlsCars.cars.cars, data),
-    // updateById: (id, data) => apiService.put(urlsCars.cars.byId(id), data),
-    // deleteById: (id) => apiService.delete(urlsCars.cars.byId(id))
+    getAll: (page) => apiService.get(urls.movies, {params: {page}}),
+    getGenres: () => apiService.get(urls.genres),
+    searchMovie:(title) => `search/keyword?query=${title}`,
+    getPoster: (backdrop_path)=> `${backdrop_path}`
 }
 
 export {moviesService}

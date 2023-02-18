@@ -10,8 +10,7 @@ const Header = () => {
     return (
         <div className={css.header}>
             <NavLink to={'movies'}>movies</NavLink>
-            <NavLink to={'cars'}>cars</NavLink>
-            <NavLink to={'posts'}>posts</NavLink>
+            <NavLink to={'movies_card'}>movies_card</NavLink>
         </div>
     );
 };

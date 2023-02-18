@@ -4,6 +4,7 @@ import {moviesService} from "../../services";
 
 const initialState = {
     movies: [],
+    genres: [],
     prev:null,
     next:null,
     errors: null,
@@ -15,7 +16,6 @@ const getAll = createAsyncThunk(
     async ({page}, thunkAPI) => {
         try {
             const {data} = await moviesService.getAll(page);
-            console.log(data.results);
             return data.results
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
@@ -23,6 +23,33 @@ const getAll = createAsyncThunk(
     }
 );
 
+const getPoster = createAsyncThunk(
+    'movieSlice/getPoster',
+    async ({page}, thunkAPI) => {
+        try {
+            const {data} = await moviesService.getAll(page);
+            return data.results
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
+
+
+
+
+const getGenres = createAsyncThunk(
+    'movieSlice/getGenres',
+    async (_, thunkAPI) => {
+        try {
+            const {data} = await moviesService.getGenres;
+            console.log(data)
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
 
 const movieSlice = createSlice({
     name: 'movieSlice',
@@ -34,12 +61,27 @@ const movieSlice = createSlice({
     },
     extraReducers: (builder) => builder
         .addCase(getAll.fulfilled, (state, action) => {
-            const {prev, next, items} = action.payload
+            // const {prev, next, items} = action.payload
+            state.movies= action.payload
             state.loading = false
-            state.movies = items
-            console.log(state)
-            state.prev=prev
-            state.next=next
+            console.log(state.movies)
+
+        })
+        .addCase(getPoster.fulfilled, (state, action) => {
+    // const {prev, next, items} = action.payload
+    state.movies= action.payload
+    state.loading = false
+    // state.movies = items
+    console.log(state.movies)
+    // state.prev=prev
+    // state.next=next
+})
+        .addCase(getGenres.fulfilled, (state, action) => {
+            // const {prev, next, items} = action.payload
+            state.genres= action.payload
+            state.loading = false
+            console.log(state.genres)
+
         })
         .addDefaultCase((state, actions) => {
             const [actionStatus] = actions.type.split('/').slice(-1);
@@ -50,7 +92,9 @@ const movieSlice = createSlice({
 const {reducer: movieReducer} = movieSlice
 
 const movieActions = {
-    getAll
+    getAll,
+    getGenres,
+    getPoster
 }
 
 export {movieReducer, movieActions}

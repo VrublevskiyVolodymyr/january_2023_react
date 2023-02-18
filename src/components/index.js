@@ -6,4 +6,5 @@ export * from './Cars/Cars';
 export * from './CarsForm/CarsForm';
 export * from './Movie/Movie';
 export * from './Movies/Movies';
+export * from './MoviesListCard/MoviesListCard';
 
