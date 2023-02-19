@@ -3,7 +3,7 @@ import {Outlet} from "react-router-dom";
 
 import {Movies} from '../../components'
 
-const MoviesPage = () => {
+const MoviesListPage = () => {
     return (
         <div>
                <Movies/>
@@ -12,4 +12,4 @@ const MoviesPage = () => {
     );
 };
 
-export {MoviesPage};
+export {MoviesListPage};

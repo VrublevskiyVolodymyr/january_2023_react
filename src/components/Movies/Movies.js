@@ -7,20 +7,19 @@ import {movieActions} from "../../redux";
 import {Movie} from '../Movie/Movie'
 
 const Movies = () => {
-    const {movies, genres, prev, next} = useSelector(state => state.movies);
+    const {movies, prev, next} = useSelector(state => state.movies);
 
-    console.log(genres)
+
     const dispatch = useDispatch();
     const[query, setQuery]= useSearchParams({page:'1'});
 
     useEffect(() => {
         dispatch(movieActions.getAll({page:query.get('page')}))
-        console.log(dispatch(movieActions.getAll({page: 1})));
     }, [dispatch,query])
+
 
     useEffect(() => {
         dispatch(movieActions.getGenres())
-        console.log(dispatch(movieActions.getGenres()));
     }, [dispatch])
 
     return (

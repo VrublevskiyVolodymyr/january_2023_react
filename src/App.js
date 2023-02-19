@@ -7,7 +7,7 @@
 
 
 import {Navigate, Route, Routes} from "react-router-dom";
-import {MoviesListCardPage, MoviesPage} from "./pages";
+import {MoviesListCardPage, MoviesListPage, SearchPage} from "./pages";
 import {MainLayout} from "./layouts";
 
 
@@ -18,8 +18,9 @@ const App = () => {
             <Routes>
                 <Route path={'/'} element={<MainLayout/>}>
                     <Route index element={<Navigate to={'movies'}/>}/>
-                    <Route path={'movies'} element={<MoviesPage/>}/>
-                        <Route path={'movies_card'} element={<MoviesListCardPage/>}/>
+                    <Route path={'movies'} element={<MoviesListPage/>}/>
+                    <Route path={'movies_card'} element={<MoviesListCardPage/>}/>
+                    <Route path={'search_movie'} element={<SearchPage/>}/>
                 </Route>
             </Routes>
         </div>

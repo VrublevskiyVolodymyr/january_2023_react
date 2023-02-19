@@ -5,6 +5,8 @@ import {moviesService} from "../../services";
 const initialState = {
     movies: [],
     genres: [],
+    searchMovie: [],
+    selectedMovie: null,
     prev:null,
     next:null,
     errors: null,
@@ -16,34 +18,30 @@ const getAll = createAsyncThunk(
     async ({page}, thunkAPI) => {
         try {
             const {data} = await moviesService.getAll(page);
-            return data.results
+            return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 );
 
-const getPoster = createAsyncThunk(
-    'movieSlice/getPoster',
-    async ({page}, thunkAPI) => {
+const searchMovie = createAsyncThunk(
+    'movieSlice/searchMovie',
+    async ({title}, thunkAPI) => {
         try {
-            const {data} = await moviesService.getAll(page);
-            return data.results
+            const {data} = await moviesService.searchMovie(title);
+            return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
         }
     }
 );
-
-
-
 
 const getGenres = createAsyncThunk(
     'movieSlice/getGenres',
     async (_, thunkAPI) => {
         try {
             const {data} = await moviesService.getGenres;
-            console.log(data)
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
@@ -55,32 +53,30 @@ const movieSlice = createSlice({
     name: 'movieSlice',
     initialState,
     reducers: {
-        // setCarForUpdate: (state, action) => {
-        //     state.carForUpdate = action.payload
-        // }
+        setSelectedMovie: (state, action) => {
+            state.selectedMovie = action.payload
+        }
     },
     extraReducers: (builder) => builder
         .addCase(getAll.fulfilled, (state, action) => {
-            // const {prev, next, items} = action.payload
-            state.movies= action.payload
+            const {results, page} = action.payload
+            state.movies= results
+            state.prev=page-1
+            state.next=page+1
             state.loading = false
-            console.log(state.movies)
-
         })
-        .addCase(getPoster.fulfilled, (state, action) => {
-    // const {prev, next, items} = action.payload
-    state.movies= action.payload
-    state.loading = false
-    // state.movies = items
-    console.log(state.movies)
-    // state.prev=prev
-    // state.next=next
-})
+
         .addCase(getGenres.fulfilled, (state, action) => {
-            // const {prev, next, items} = action.payload
             state.genres= action.payload
             state.loading = false
-            console.log(state.genres)
+
+        })
+        .addCase(searchMovie.fulfilled, (state, action) => {
+            const {results, page} = action.payload
+            state.searchMovie= results
+            state.prev=page-1
+            state.next=page+1
+            state.loading = false
 
         })
         .addDefaultCase((state, actions) => {
@@ -89,12 +85,13 @@ const movieSlice = createSlice({
         })
 });
 
-const {reducer: movieReducer} = movieSlice
+const {reducer: movieReducer, actions: {setSelectedMovie}} = movieSlice
 
 const movieActions = {
     getAll,
     getGenres,
-    getPoster
+    setSelectedMovie,
+    searchMovie
 }
 
 export {movieReducer, movieActions}

@@ -4,7 +4,7 @@ const imageURL = 'https://image.tmdb.org/t/p/w500/'
 const urls= {
         movies: `/discover/movie?`,
         genres: `/genre/movie/list`,
-        search_movie: (title)=> `/search/keyword?query=${title}`,
+        search_movie: (title) => `/search/keyword?query=${title}`,
 }
 
 
