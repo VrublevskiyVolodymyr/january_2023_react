@@ -1,0 +1,16 @@
+.movie {
+    width: 23%;
+    border: darkred solid 1px;
+    margin: 5px;
+    background: #bbbbbb;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+h5 {
+    text-align: center;
+
+}

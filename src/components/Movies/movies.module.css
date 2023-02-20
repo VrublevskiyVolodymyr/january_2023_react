@@ -1,0 +1,13 @@
+
+.container {
+    width: 100%;
+    background-color: darkslategray;
+}
+
+.movies {
+    display: flex;
+    border: #ce0707 solid 1px;
+    flex-wrap: wrap;
+
+}
+

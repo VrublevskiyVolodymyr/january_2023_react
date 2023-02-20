@@ -1,0 +1,14 @@
+.menu{
+position: absolute;
+    background: #585856;
+}
+li:hover{
+    color: darkred;
+    cursor: pointer;
+}
+.genre{
+    color: #ffffff;
+}
+.genre:hover{
+    color: #2269ba;
+}

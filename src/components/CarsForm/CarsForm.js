@@ -4,7 +4,7 @@ import {joiResolver} from "@hookform/resolvers/joi";
 import {useDispatch, useSelector} from "react-redux";
 
 import {carActions} from "../../redux";
-import {carValidator} from "../../validators";
+import {titleValidator} from "../../validators";
 import {useNavigate} from "react-router-dom";
 
 
@@ -12,7 +12,7 @@ const CarsForm = () => {
 
     const {register, handleSubmit, reset, setValue, formState: {isValid}} = useForm({
         mode: 'all',
-        resolver: joiResolver(carValidator)
+        resolver: joiResolver(titleValidator)
     })
     const dispatch = useDispatch();
     const navigate = useNavigate();

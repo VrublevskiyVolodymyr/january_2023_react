@@ -1,1 +1,1 @@
-export * from './carValidator';
+export * from './titleValidator';
