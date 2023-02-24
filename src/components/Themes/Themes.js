@@ -1,6 +1,4 @@
-import React, {useState} from 'react';
-import {useTheme} from "../../hooks/theme";
-import {Button, ButtonGroup} from "react-bootstrap";
+import {useTheme} from "../../hooks";
 import css from './themes.module.css'
 
 const Themes = () => {
@@ -12,8 +10,6 @@ const Themes = () => {
     const handleDarkThemeClick = () => {
         setTheme('dark')
     }
-
-
 
     return (
             <div className="p-3 d-flex justify-content-end">
