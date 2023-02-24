@@ -1,29 +1,43 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {Movie} from "../Movie/Movie";
 import {movieActions} from "../../redux";
+import css from './search.module.css'
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 
 const Search = () => {
+    const{title}=useParams();
     const dispatch = useDispatch();
-    const { title, searchMovie, total_pages, prev, next} = useSelector(state => state.movies);
+    const {searchMovie, total_pages, prev, next, loading} = useSelector(state => state.movies);
     const[query, setQuery]= useSearchParams({page:'1'});
 
     useEffect(() => {
         dispatch(movieActions.searchMovie( {title, page:query.get('page')}))
-    }, [dispatch,query])
-
+    }, [dispatch,query,title])
 
 
     return (
-        <div >
-            <div>
-                <button disabled={!prev} onClick={()=>setQuery(query=>({page:+query.get('page')-1}))}>prev</button>
-                <button disabled={next===total_pages+1} onClick={()=>setQuery(query=>({page:+query.get('page')+1}))}>next</button>
+        <div className={css.container}>
+
+            <button className="btn btn-dark" id={css.button} disabled={!prev}
+                    onClick={() => setQuery(query => ({page: +query.get('page') - 1}))}>
+                <span></span>  <span></span>  <span></span>  <span></span>
+                Prev
+            </button>
+
+            <div className={css.movies}>
+                {searchMovie.length > 0 ?searchMovie.map(movie => <Movie key={movie.id} movie={movie}/>):(
+                    <h2>Sorry !! No Movies Found</h2>)}}
+                {loading && <ClipLoader color={'#1BFFFF'} loading={loading} size={150}/>}
             </div>
-            {searchMovie.map(movie => <Movie key={movie.id} movie={movie}/>)}
+            <button className="btn btn-dark" id={css.button} disabled={next === total_pages + 1}
+                    onClick={() => setQuery(query => ({page: +query.get('page') + 1}))}>
+                <span></span>  <span></span>  <span></span>  <span></span>
+                Next
+            </button>
         </div>
     );
 };

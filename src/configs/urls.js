@@ -5,23 +5,8 @@ const urls= {
         movies: '/discover/movie?',
         genres:  '/genre/movie/list',
         search_movie: (title) => `/search/movie?query=${title}`,
-        byGenresId: (id)=> `/discover/movie?&with_genres=${id}`
+        byGenresId: (id)=> `/discover/movie?&with_genres=${id}`,
+        getById:(id)=> `/movie/${id}`
 }
-
-
-
-
-// const urls = {
-//     cars: {
-//         cars,
-//         byId: (id) => `${cars}/${id}`
-//     },
-//     auth:{
-//         login:auth,
-//         refresh:`${auth}/refresh`,
-//         me:`${auth}/me`
-//     },
-//     users:'/users'
-// }
 
 export {baseURL,imageURL,urls,access}

@@ -1,10 +1,8 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 
-import { postReducer, carReducer, movieReducer} from "./slices";
+import {movieReducer} from "./slices";
 
 const rootReducer = combineReducers({
-    posts: postReducer,
-    cars: carReducer,
     movies: movieReducer
 });
 

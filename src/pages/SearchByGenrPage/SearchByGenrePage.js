@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {SearchByGenre} from "../../components";
 
 const SearchByGenrePage = () => {

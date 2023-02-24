@@ -10,11 +10,12 @@ const initialState = {
     title:null,
     idGenre:null,
     selectedMovie: null,
+    movieById:null,
     total_pages:null,
     prev:null,
     next:null,
     errors: null,
-    loading: null,
+    loading: true,
 };
 
 const getAll = createAsyncThunk(
@@ -22,6 +23,18 @@ const getAll = createAsyncThunk(
     async ({page}, thunkAPI) => {
         try {
             const {data} = await moviesService.getAll(page);
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
+
+const getById = createAsyncThunk(
+    'movieSlice/getById',
+    async ({id}, thunkAPI) => {
+        try {
+            const {data} = await moviesService.getById(id);
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
@@ -86,11 +99,19 @@ const movieSlice = createSlice({
             state.prev=page-1
             state.next=page+1
             state.total_pages=total_pages
-            state.loading = false
+            // state.loading = false
+        })
+        .addCase(getAll.pending, (state, action) => {
+            state.loading = true
         })
 
         .addCase(getGenres.fulfilled, (state, action) => {
             state.genres= action.payload
+            state.loading = false
+        })
+
+        .addCase(getById.fulfilled, (state, action) => {
+            state.movieById= action.payload
             state.loading = false
         })
         .addCase(searchMovie.fulfilled, (state, action) => {
@@ -102,6 +123,9 @@ const movieSlice = createSlice({
             state.loading = false
 
         })
+        .addCase(searchMovie.pending, (state, action) => {
+            state.loading = true
+        })
         .addCase(getAllByGenres.fulfilled, (state, action) => {
             const {results,total_pages, page} = action.payload
             state.genresById= results
@@ -109,6 +133,9 @@ const movieSlice = createSlice({
             state.next=page+1
             state.total_pages=total_pages
             state.loading = false
+        })
+        .addCase(getAllByGenres.pending, (state, action) => {
+            state.loading = true
         })
         .addDefaultCase((state, actions) => {
             const [actionStatus] = actions.type.split('/').slice(-1);
@@ -123,6 +150,7 @@ const movieActions = {
     getGenres,
     setSelectedMovie,
     searchMovie,
+    getById,
     setTitle,
     getAllByGenres,
     setIdGenre

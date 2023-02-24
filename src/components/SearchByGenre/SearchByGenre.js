@@ -1,31 +1,39 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import {movieActions} from "../../redux";
 import {Movie} from "../Movie/Movie";
+import css from './searchGenre.module.css'
+import ClipLoader from "react-spinners/ClipLoader";
 
 const SearchByGenre = () => {
-
+    const{idGenre}=useParams();
     const dispatch = useDispatch();
-    const {idGenre,genres, genresById, total_pages, prev, next} = useSelector(state => state.movies);
+    const {genresById, total_pages, prev, next, loading} = useSelector(state => state.movies);
     const [query, setQuery] = useSearchParams({page: '1'});
-    const id = idGenre.id
-    console.log(genres)
-    console.log(id)
+    const id = idGenre
     useEffect(() => {
         dispatch(movieActions.getAllByGenres({id, page: query.get('page')}))
-    }, [dispatch, query,id])
+    }, [dispatch, query, idGenre])
 
 
     return (
-        <div>
-            <div>
-                <button disabled={!prev} onClick={() => setQuery(query => ({page: +query.get('page') - 1}))}>prev
-                </button>
-                <button disabled={next === total_pages + 1} onClick={() => setQuery(query => ({page: +query.get('page') + 1}))}>next
-                </button>
+        <div className={css.container}>
+            <button className="btn btn-dark" id={css.button} disabled={!prev}
+                    onClick={() => setQuery(query => ({page: +query.get('page') - 1}))}>
+                <span></span>  <span></span>  <span></span>  <span></span>
+                Prev
+            </button>
+
+            <div className={css.movies}>
+                {genresById.map(movie => <Movie key={movie.id} movie={movie}/>)}
+                {loading&& <ClipLoader color={'#1BFFFF'} loading={loading} size={150}/>}
             </div>
-            {genresById.map(movie => <Movie key={movie.id} movie={movie}/>)}
+            <button className="btn btn-dark" id={css.button} disabled={next === total_pages + 1}
+                    onClick={() => setQuery(query => ({page: +query.get('page') + 1}))}>
+                <span></span>  <span></span>  <span></span>  <span></span>
+                Next
+            </button>
         </div>
     );
 };
