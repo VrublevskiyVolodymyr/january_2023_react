@@ -1,10 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from "react-router-dom";
 import {imageURL} from "../../configs";
 import {useDispatch, useSelector} from "react-redux";
 import css from './movieCard.module.css'
 import {StarRating} from "../StarRating/StarRating";
 import {movieActions} from "../../redux";
+import {Trailer} from "../Trailer/Trailer";
 
 const MovieCard = () => {
     const{id}=useParams();
@@ -12,15 +13,22 @@ const MovieCard = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {movieById,selectedMovie} = useSelector(state => state.movies);
-
+    const movieCard=selectedMovie||movieById;
 
     useEffect(() => {
         dispatch(movieActions.getById({id}))
-    }, [dispatch,movieById])
+    }, [dispatch,id])
 
 
-const movieCard=selectedMovie||movieById;
+    const [onVideo, setOnVideo]=useState(false)
 
+const playTrailer=()=>{
+    setOnVideo(true)
+}
+
+    const closeTrailer=()=>{
+        setOnVideo(false)
+    }
 
 
 
@@ -53,12 +61,19 @@ const movieCard=selectedMovie||movieById;
                         <p>{movieById.tagline}</p>
 
                     </div>
+
+                    <button  id={css.button} onClick={() => onVideo? closeTrailer(): playTrailer()  }>
+                        <span></span>  <span></span>  <span></span>  <span></span>{onVideo? <h5>Close player</h5>:<h5>Play trailer</h5>}</button>
+
+                    {onVideo&&<Trailer key={id} movieId={movieById}/>}
+
                     <hr/>
+
                     <button className="btn btn-dark" id={css.button} onClick={() => navigate(-1)}>
-                        <span></span>  <span></span>  <span></span>  <span></span>
-                        Back</button>
+                        <span></span>  <span></span>  <span></span>  <span></span>Back</button>
                 </div>
             }
+
         </div>
     );
 };

@@ -7,6 +7,7 @@ const initialState = {
     genres: [],
     searchMovie: [],
     genresById: [],
+    trailer:null,
     title:null,
     idGenre:null,
     selectedMovie: null,
@@ -35,6 +36,18 @@ const getById = createAsyncThunk(
     async ({id}, thunkAPI) => {
         try {
             const {data} = await moviesService.getById(id);
+            return data
+        } catch (e) {
+            return thunkAPI.rejectWithValue(e.response.data)
+        }
+    }
+);
+const getTrailer = createAsyncThunk(
+    'movieSlice/getTrailer',
+    async ({id}, thunkAPI) => {
+        try {
+            console.log(id)
+            const {data} = await moviesService.getTrailer(id);
             return data
         } catch (e) {
             return thunkAPI.rejectWithValue(e.response.data)
@@ -99,19 +112,18 @@ const movieSlice = createSlice({
             state.prev=page-1
             state.next=page+1
             state.total_pages=total_pages
-            // state.loading = false
+            state.loading = false
         })
-        .addCase(getAll.pending, (state, action) => {
-            state.loading = true
-        })
-
         .addCase(getGenres.fulfilled, (state, action) => {
             state.genres= action.payload
             state.loading = false
         })
-
         .addCase(getById.fulfilled, (state, action) => {
             state.movieById= action.payload
+            state.loading = false
+        })
+        .addCase(getTrailer.fulfilled, (state, action) => {
+            state.trailer= action.payload
             state.loading = false
         })
         .addCase(searchMovie.fulfilled, (state, action) => {
@@ -121,10 +133,6 @@ const movieSlice = createSlice({
             state.next=page+1
             state.total_pages=total_pages
             state.loading = false
-
-        })
-        .addCase(searchMovie.pending, (state, action) => {
-            state.loading = true
         })
         .addCase(getAllByGenres.fulfilled, (state, action) => {
             const {results,total_pages, page} = action.payload
@@ -133,9 +141,6 @@ const movieSlice = createSlice({
             state.next=page+1
             state.total_pages=total_pages
             state.loading = false
-        })
-        .addCase(getAllByGenres.pending, (state, action) => {
-            state.loading = true
         })
         .addDefaultCase((state, actions) => {
             const [actionStatus] = actions.type.split('/').slice(-1);
@@ -151,6 +156,7 @@ const movieActions = {
     setSelectedMovie,
     searchMovie,
     getById,
+    getTrailer,
     setTitle,
     getAllByGenres,
     setIdGenre
