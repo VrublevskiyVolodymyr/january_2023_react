@@ -4,9 +4,7 @@
     height: 200px;
     overflow-y: scroll;
 }
-.genres a[class='active'] {
-    color: var(--active-color);
-}
+
 ::-webkit-scrollbar {
     display: none;
 }

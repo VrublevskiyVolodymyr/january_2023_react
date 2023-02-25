@@ -29,6 +29,9 @@ const playTrailer=()=>{
     const closeTrailer=()=>{
         setOnVideo(false)
     }
+    const searchClick = (idGenre,nameGenre)=> {
+        navigate(`/search_movie_by_genre/${idGenre}/${nameGenre}?page=1`);
+    }
 
 
 
@@ -43,8 +46,8 @@ const playTrailer=()=>{
 
                         <div className={css.details}>
                             <div>
-                                {movieById.genres.map(genre => <span
-                                    className="badge bg-secondary">{genre.name}</span>)}
+                                {movieById.genres.map(genre => <span id={css.badge}
+                                    className="badge rounded-pill badge bg-secondary text-dark" onClick={()=>searchClick(`${genre.id}`, `${genre.name}`)}>{genre.name}</span>)}
                             </div>
                             <h6>Popularity: {movieById.popularity}</h6>
                             <h6> Release date: {movieById.release_date}</h6>
